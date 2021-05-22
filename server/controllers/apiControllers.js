@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
 
 const { readFromFile, writeToFile } = require("../utils/utils");
 
@@ -12,14 +13,27 @@ const postData = (req, res) => {
   const notes = readFromFile("db");
 
   const { title, text } = req.body;
-  const newNote = { title, text };
+  const id = uuidv4();
+  const newNote = { title, text, id };
   notes.push(newNote);
-
-  console.log(notes);
 
   writeToFile("db", JSON.stringify(notes));
 
   res.json(newNote);
 };
 
-module.exports = { getData, postData };
+const deleteById = (req, res) => {
+  const notes = readFromFile("db");
+  const { id } = req.params;
+  const filtered = (each) => {
+    return each.id !== id;
+  };
+
+  const filteredNotes = notes.filter(filtered);
+
+  writeToFile("db", JSON.stringify(filteredNotes));
+
+  res.status(200).json({ message: "note deleted" });
+};
+
+module.exports = { getData, postData, deleteById };
