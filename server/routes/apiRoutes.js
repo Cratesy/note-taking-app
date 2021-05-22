@@ -1,10 +1,10 @@
 const { Router } = require("express");
 
-const { htmlData, notesData } = require("../controllers/apiControllers");
+const { getData, postData } = require("../controllers/apiControllers");
 
 const apiRouter = Router();
 
-apiRouter.get("/notes", notesData);
-apiRouter.get("*", htmlData);
+apiRouter.get("/notes", getData);
+apiRouter.post("/notes", postData);
 
 module.exports = apiRouter;
