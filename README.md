@@ -54,7 +54,7 @@ None were needed
 
 ## deployed url
 
-https://git.heroku.com/aqueous-stream-42133.git
+https://aqueous-stream-42133.herokuapp.com/
 
 ## screenshots
 
